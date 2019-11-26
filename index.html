@@ -16,11 +16,10 @@
 </head>
 
 <body>
-    <div class="app">
-        <form class="input-join">
+    <div id="body" class="app">
+        <form class="input-join w-60 h-10">
             <input type="text" id="searchInput" class="search" placeholder="Enter city e.g Lagos, Nigeria ">
             <button id="searchbtn"><i id="searchIcon" class="fa fa-search icon"></i></button>
-
             <div id="searchspinner" class="d-none">
                 <div class="lds-ripple">
                     <div></div>
@@ -28,21 +27,46 @@
                 </div>
             </div>
         </form>
-
-        <div id="weather-card" class="card d-none">
-            <div class="card-aside-nav">
-                <div class="weather-box d-flex justify-content-center">
-                    <h4 class="pad-1" style="padding:1em">Location: <span id="city">State</span></h4>
-                    <h4 class="pad-1">Temperature: <span id="freint">0</span>&deg;F </h4>
-                    <p class="pad-1"> Humility:<span id="Humility"></span></p>
-                    <p class="pad-1"> Pressure:<span id="Pressure"></span></p>
-                    <p class="pad-1"> Wind Speed:<span id="Wind"></span></p>
-                    <p class="pad-1"> weather:<span id="weather"></span></p>
+        <div id="weather-card" class="d-none">
+            <div class="justify-content-center">
+                <div class="result-card d-flex">
+                    <div class=" bg-transparent">
+                        <h1><span id="city"></span></h1> <button id="showMap" class="primary-btn pad-1">View map</button>
+                    </div>
                 </div>
             </div>
+            <div id="" class="card w-60 pad-1" style="display: block; padding: 2em;">
+                <div class="container-row">
+                    <div class="pad-2 column-6">
+                        <h1 style="font-size: 3em; font-family: Montserrat-SemiBold;"><span id="freint"></span>&deg;F </h1>
+                        <h4><span id="celcius"></span><span>&deg;C</span></h4> 28th, November, 2018
+                    </div>
+                    <div class="column-6">
+                        <div class="container-row d-flex" style="align-content: center;">
+                            <div class="column-3">
+                                <div class="d-block">
+                                    <img id="weather_img" src="images/icons/rainbow.png" alt="" srcset="">
+                                    <h4><span id="weather"></span></h4>
+                                </div>
+                            </div>
+                            <div class="column-3 pad-1">
+                                <p class="pad-0_5"> Humidity: &nbsp;<span id="Humility"></span>
+                                    <SMall>  kg / m&#179;</SMall>
+                                </p>
+                                <p class="pad-0_5"> Pressure: &nbsp;<span id="Pressure"></span> Pa</p>
+                                <p class="pad-0_5"> Wind Speed: &nbsp;<span id="Wind"></span>m/s</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="map-card" class="card h-70 w-60 d-none">
             <div id="map"></div>
         </div>
     </div>
+
 
     <script src="js/custom.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe444AzYi0pf9UfvSFdnSOtaZmqdhjkrw&callback=initMap"></script>

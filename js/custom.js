@@ -8,6 +8,11 @@ $(document).ready(function() {
         fetch_weather(city)
         console.log(city)
     });
+    $('#showMap').click(function(e) {
+        e.preventDefault();
+        $('#weather-card').fadeIn(1000).addClass('d-none');
+        $('#map-card').fadeIn(1000).removeClass('d-none');
+    });
 
     //https://samples.openweathermap.org/data/2.5/weather?q=lagos&appid=8fb73799f65352e83e4792ed87c0a624
     //8fb73799f65352e83e4792ed87c0a624
@@ -19,12 +24,17 @@ $(document).ready(function() {
             .then(res => res.json())
             .then(res => {
                 $('#freint').html(res.main.temp);
+                var f = res.main.temp;
+                var aF = (f - 32) * 5;
+                var c = Math.round((aF / 9) * 100) / 100;
+                $('#celcius').html(c);
                 $('#Humility').html(res.main.humidity);
                 $('#Pressure').html(res.main.pressure);
                 $('#Wind').html(res.wind.speed);
                 $('#weather').html(res.weather[0].description);
                 $('#city').html(res.name);
                 $('#searchspinner').toggleClass('d-none');
+                $('#weather_img').attr('src', 'http://openweathermap.org/img/wn/' + res.weather[0].icon + '@2x.png');
                 var lat = res.coord.lat;
                 initMap({
                         lat: res.coord.lat,
@@ -56,7 +66,7 @@ $(document).ready(function() {
                 zoom: 10,
                 center: uluru,
                 label: labels[labelIndex++ % labels.length],
-                icon: 'geosearch/images/icons/Pin.png'
+                icon: 'images/icons/Pin.png'
             });
         // The marker, positioned at Uluru
         var marker = new google.maps.Marker({
@@ -64,7 +74,7 @@ $(document).ready(function() {
             map: map,
             draggable: true,
             animation: google.maps.Animation.DROP,
-            icon: 'geosearch/images/icons/Pin.png'
+            icon: 'images/icons/Pin.png'
         });
         marker.addListener('click', toggleBounce(marker));
         // var weather = marker.GetCurrentWeatherAtMarker();
