@@ -17,6 +17,37 @@
       flex-direction: column;
     }
 
+    .text-align-center {
+      text-align: center !important;
+    }
+
+    .text-white {
+      color: white !important;
+    }
+    .link {
+      font-weight: 400;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .link:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    .link:focus, .link.focus {
+      text-decoration: underline;
+      box-shadow: none;
+    }
+    .btn {
+      height: 10%;
+      padding: 2.4em;
+    }
+
+    .btn-brown {
+      background-color: brown !important;
+    }
+
     .grid-row {
       display: block;
       -ms-flex-wrap: wrap;
@@ -252,10 +283,11 @@
 
     .lds-ripple div {
       position: absolute;
-      border: 4px solid #fff;
+      align-self: center;
+      border: 4px solid brown;
       opacity: 1;
       border-radius: 50%;
-      background-color: black;
+      /* background-color: black; */
       animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
     }
 
