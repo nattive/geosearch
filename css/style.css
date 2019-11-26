@@ -48,9 +48,10 @@ body,
 html {
     height: 100%;
     font-family: Poppins-Regular, sans-serif;
-    background-image: url(../images/background.jpg);
+    background-color: rgb(218, 238, 238);
+    /* background-image: url(../images/background.jpg); */
     background-size: cover;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .app {
@@ -66,7 +67,7 @@ html {
 
 .input-join {
     padding: 2.4em;
-    box-shadow: 3px 3px 13px rgb(46, 45, 45);
+    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
     display: flex;
     display: -ms-flexbox;
     justify-content: center;
@@ -114,7 +115,7 @@ html {
 .card {
     display: flex;
     flex-direction: row;
-    box-shadow: 3px 3px 13px rgb(46, 45, 45);
+    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
     background-color: white;
     justify-self: center;
 }

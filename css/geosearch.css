@@ -346,6 +346,62 @@
     .text-white {
         color: white !important;
     }
+    
+    .navbar {
+        height: 10%;
+        display: -ms-flexbox;
+        list-style-type: none;
+        display: flex;
+        padding: 20px;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-bottom: 10%;
+    }
+    
+    .m-top-1 {
+        margin-top: 1rem !important;
+    }
+    
+    .navlist {
+        display: -ms-flexbox;
+        list-style-type: none;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+    
+    .justify-content-end {
+        -ms-flex-pack: end !important;
+        justify-content: flex-end !important;
+    }
+    
+    .navlist .nav-item:hover {
+        background-color: rgba(0, 128, 128, 0.301);
+        padding: 10px;
+        transition: 0.5s;
+        color: white;
+    }
+    
+    .navlist .nav-item {
+        padding: 0.3em;
+        margin: 0.3em;
+    }
+    
+    .navlist .nav-item a {
+        text-decoration: none;
+    }
+    
+    .nav-fixed-top {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+    }
+    
+    .bg-white {
+        background-color: white !important;
+    }
     /*------------------------------------------------------------------
 [ Responsive ]*/
     

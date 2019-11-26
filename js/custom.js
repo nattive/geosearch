@@ -63,7 +63,7 @@ $(document).ready(function() {
         // The map, centered at Uluru
         var map = new google.maps.Map(
             document.getElementById('map'), {
-                zoom: 10,
+                zoom: 12,
                 center: uluru,
                 label: labels[labelIndex++ % labels.length],
                 icon: 'images/icons/Pin.png'
