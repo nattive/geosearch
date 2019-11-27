@@ -452,6 +452,9 @@
     }
     
     @media (max-width: 576px) {
+        .mobile-menu {
+            display: none;
+        }
         .input-join {
             display: flex;
             padding: 0;

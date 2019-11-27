@@ -1,881 +1,102 @@
-.card-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/geosearch.css">
+    <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <title>GeoSearch</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+
+<body class="bg-img overflow-hidden">
+    <header class="navbar bg-white nav-fixed-top justify-content-space-between" style="width: 100%;">
+        <div>
+            <img class="logo" src="images/logo.png" alt="logo">
+        </div>
+        <form class="d-none" id="input-nav-container">
+            <input type="text" id="header_searchInput" class="navbar-search" placeholder="Enter city e.g Lagos, Nigeria ">
+            <button id="header_searchbtn"><i id="header_searchIcon" class="fa fa-search icon"></i></button>
+            <!-- <div id="searchspinner" class="d-none">
+                <div class="lds-ripple">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div> -->
+        </form>
+        <ul class="navlist">
+            <li class="nav-item hide"><a href="#"> Home </a></li>
+            <li class="nav-item hide showMap"><a href="#"> View Map </a></li>
+            <li id="showWeather" class="nav-item hide"><a href="#"> View Weather Info </a></li>
+            <li class="nav-item"><a href="#"> My Location Weather </a></li>
+            <li class="nav-item"><a href="#"> Saterlite Images </a></li>
+        </ul>
+    </header>
+    <div id="mtop" class="m-top-4"></div>
+    <div id="body" class="app" style="margin-bottom: 10%;">
+        <div id="error" class="w-60 d-none"><span id="error_message" class="text-white"></span></div>
+        <form id="main_search_input" class="input-join w-60 h-10">
+            <input type="text" id="searchInput" class="search" placeholder="Enter city e.g Lagos, Nigeria ">
+            <button id="searchbtn"><i id="searchIcon" class="fa fa-search icon"></i></button>
+            <div id="searchspinner" class="d-none">
+                <div class="lds-ripple">
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </form>
+        <div id="weather-card" class="d-none">
+            <div class="justify-content-center">
+                <div class="result-card d-flex">
+                    <div class=" bg-transparent">
+                        <h1><span id="city"></span></h1> <button id="showMap" class="primary-btn pad-1 showMap">View map</button>
+                    </div>
+                </div>
+            </div>
+            <div id="" class="card w-60 pad-1" style="display: block; padding: 2em;">
+                <div class="container-row">
+                    <div class="pad-2 column-6">
+                        <h1 style="font-size: 3em; font-family: Montserrat-SemiBold;"><span id="freint"></span>&deg;F </h1>
+                        <h4><span id="celcius"></span><span>&deg;C</span></h4> 28th, November, 2018
+                    </div>
+                    <div class="column-6">
+                        <div class="container-row d-flex" style="align-content: center;">
+                            <div class="column-3">
+                                <div class="d-block">
+                                    <img id="weather_img" src="images/icons/rainbow.png" alt="" srcset="">
+                                    <h4><span id="weather"></span></h4>
+                                </div>
+                            </div>
+                            <div class="column-3 pad-1">
+                                <p class="pad-0_5"> Humidity: &nbsp;<span id="Humility"></span>
+                                    <SMall>  kg / m&#179;</SMall>
+                                </p>
+                                <p class="pad-0_5"> Pressure: &nbsp;<span id="Pressure"></span> Pa</p>
+                                <p class="pad-0_5"> Wind Speed: &nbsp;<span id="Wind"></span>m/s</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="map-card" class="card h-70 w-60 d-none">
+            <div id="map"></div>
+        </div>
+    </div>
+
+
+    <script src="js/custom.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAe444AzYi0pf9UfvSFdnSOtaZmqdhjkrw&callback=initMap"></script>
+    <script src="https://raw.githubusercontent.com/paarthneekhara/Weather-From-Map/master/script/weatherFromMap.js"></script>
+</body>
+
+</html>
 
-.card-box {
-    min-width: 70%;
-    position: absolute;
-    top: 10%;
-    bottom: 10%;
-    background-color: white;
-    border-radius: 7px;
-    box-shadow: 3px 3px 13px rgb(46, 45, 45);
-    display: flex;
-    flex-direction: column;
-}
 
-.text-align-center {
-    text-align: center !important;
-}
-
-.text-white {
-    color: white !important;
-}
-
-.bg-transparent {
-    background-color: transparent;
-}
-
-.bg-themes-1 {
-    background-image: linear-gradient(rgb(105, 51, 7), rgb(70, 35, 7)) !important;
-    color: white;
-}
-
-.col-auto {
-    display: flex;
-    flex-direction: column;
-    grid-template: auto;
-}
-
-.link {
-    font-weight: 400;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.w-10 {
-    width: 10% !important;
-}
-
-.w-60 {
-    width: 60%;
-}
-
-.h-40 {
-    height: 40% !important;
-}
-
-.h-10 {
-    height: 10%;
-}
-
-#error {
-    background-color: rgb(231, 63, 63);
-    color: white;
-    border-radius: 5px;
-    margin: 20px;
-    padding: 10px;
-}
-
-.bg-teal-light {
-    background-color: rgb(218, 238, 238) !important;
-    color: rgb(44, 43, 43) !important;
-    text-align: center;
-}
-
-.bg-tomato {
-    background-color: tomato !important;
-}
-
-.container-row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px;
-}
-
-.d-block {
-    display: block;
-}
-
-.link:hover {
-    color: #0056b3;
-    text-decoration: underline;
-}
-
-.link:focus,
-.link.focus {
-    text-decoration: underline;
-    box-shadow: none;
-}
-
-.btn {
-    height: 10%;
-    padding: 2.4em;
-}
-
-.btn-brown {
-    background-color: brown !important;
-}
-
-.grid-row {
-    display: block;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    grid-template-rows: auto;
-}
-
-.space-top-10 {
-    margin-top: 1em;
-}
-
-.button-group-end {
-    top: 50%;
-    position: absolute;
-    align-self: baseline;
-    justify-self: end;
-}
-
-.card-side-nav {
-    background-color: #17375A;
-    width: 7%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-side-nav img {
-    color: white;
-    font-size: 3vh;
-    font-weight: 300;
-}
-
-.result-card {
-    height: 30%;
-    width: 60%;
-    padding: 2.4em;
-    box-shadow: 3px 3px 13px rgb(46, 45, 45);
-    display: flex;
-    display: -ms-flexbox;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    margin-bottom: 15px;
-    border: 1px solid white;
-    position: relative;
-    background-color: white;
-}
-
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.main-card-body {
-    display: block;
-    text-align: center;
-    position: absolute;
-    padding-top: 10px;
-    justify-content: center;
-    align-content: center;
-    width: 100%;
-    padding-left: 50px;
-}
-
-.card-side-nav-item {
-    padding: 2.3em;
-    margin: .5em;
-}
-
-.card-side-nav-item:hover {
-    background-color: rgba(40, 93, 150, 0.849);
-    transition: 1s;
-}
-
-.search-box h2 {
-    font-family: Montserrat-Regular;
-    font-weight: 400;
-    font-size: 2em;
-}
-
-.search-box {
-    align-self: center;
-    position: absolute;
-    justify-self: center;
-    top: 30%;
-}
-
-.search:focus {
-    padding: 0;
-    transition: 1s;
-}
-
-.search::placeholder {
-    color: rgba(23, 55, 90, 0.404);
-}
-
-.weather-box {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    padding: 5px;
-    font-size: .9em;
-    color: rgb(36, 36, 36);
-    ;
-}
-
-.dark-text {
-    color: rgb(36, 36, 36);
-}
-
-.display-flex {
-    display: flex !important;
-}
-
-.m-top-1 {
-    margin-top: 10em;
-}
-
-.m-top-2 {
-    margin-top: 8em;
-}
-
-.m-top-3 {
-    margin-top: 6em;
-}
-
-.m-top-4 {
-    margin-top: 4em;
-}
-
-.m-top-5 {
-    margin-top: 2em;
-}
-
-.column-half,
-.column-1,
-.column-2,
-.column-4,
-.column-5 {
-    width: 100%;
-    min-height: 100%;
-}
-
-.column-6 {
-    -ms-flex: 0 0 50%;
-    flex: 0 0 50%;
-    max-width: 50%;
-}
-
-.column-1 {
-    -ms-flex: 0 0 8.3%;
-    flex: 0 0 8.3%;
-    max-width: 8.3%;
-}
-
-.column-2 {
-    -ms-flex: 0 0 16.6%;
-    flex: 0 0 16.6%;
-    max-width: 16.6%;
-}
-
-.column-3 {
-    -ms-flex: 0 0 33.3%;
-    flex: 0 0 33.3%;
-    max-width: 33.3%;
-}
-
-.column-4 {
-    -ms-flex: 0 0 41.5%;
-    flex: 0 0 41.5%;
-    max-width: 41.5%;
-}
-
-.column-5 {
-    -ms-flex: 0 0 49.9%;
-    flex: 0 0 49.9%;
-    max-width: 49.9%;
-}
-
-.column-auto {
-    -ms-flex: 0 0 auto;
-    flex: 0 0 auto;
-    width: auto;
-    max-width: 100%;
-}
-
-.column-half {
-    -ms-flex: 0 0 8.333333%;
-    flex: 0 0 8.333333%;
-    max-width: 8.333333%;
-}
-
-.pad-1 {
-    padding: 1em !important;
-}
-
-.pad-0_5 {
-    padding: .5em !important;
-}
-
-.pad-2 {
-    padding: 2em !important;
-}
-
-.justify-content-center {
-    justify-content: center;
-}
-
-.primary-btn {
-    padding: 15px;
-    border: 1px solid rgb(29, 29, 29);
-    color: rgb(29, 29, 29);
-    font-size: 15px;
-    font-family: Poppins-Regular;
-}
-
-.primary-btn:hover {
-    background-color: rgb(65, 64, 64);
-    color: white;
-    transition: 1s;
-}
-
-.logo h1 {
-    font-size: 4em;
-}
-
-.logo h1 span {
-    color: tomato;
-}
-
-.d-none {
-    display: none !important;
-}
-
-.text-white {
-    color: white !important;
-}
-
-.navbar {
-    height: 15%;
-    display: -ms-flexbox;
-    list-style-type: none;
-    display: flex;
-    padding: 20px;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-bottom: 10%;
-    align-content: center;
-}
-
-.m-top-1 {
-    margin-top: 1rem !important;
-}
-
-.navlist {
-    display: -ms-flexbox;
-    list-style-type: none;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-.justify-content-end {
-    -ms-flex-pack: end !important;
-    justify-content: flex-end !important;
-}
-
-.justify-content-space-between {
-    justify-content: space-between !important;
-}
-
-.navlist .nav-item:hover {
-    background-color: rgba(0, 128, 128, 0.301);
-    padding: 10px;
-    transition: 0.5s;
-    color: white;
-}
-
-.navlist .nav-item {
-    padding: 0.3em;
-    margin: 0.3em;
-}
-
-.navlist .nav-item a {
-    text-decoration: none;
-}
-
-.nav-fixed-top {
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-}
-
-.bg-white {
-    background-color: white !important;
-}
-
-
-/*------------------------------------------------------------------
-[ Responsive ]*/
-
-@media (max-width: 992px) {}
-
-@media (max-width: 768px) {
-    .input-join {
-        display: flex;
-        display: -ms-flexbox;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 15px;
-        border: 1px solid white;
-        margin: 5px;
-        position: relative;
-        top: 0%;
-        background-color: white;
-        width: 90%;
-    }
-}
-
-@media (max-width: 576px) {
-    .input-join {
-        display: flex;
-        padding: 0;
-        display: -ms-flexbox;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 15px;
-        border: 1px solid white;
-        position: relative;
-        top: 0%;
-        background-color: white;
-    }
-    .temp-box {
-        display: flex;
-    }
-    .search-box h2 {
-        font-family: Montserrat-Regular;
-        font-weight: 400;
-        font-size: 25px;
-        text-align: center;
-    }
-}
-
-.lds-ripple {
-    display: inline-block;
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-
-.lds-ripple div {
-    position: absolute;
-    align-self: center;
-    border: 4px solid brown;
-    opacity: 1;
-    border-radius: 50%;
-    /* background-color: black; */
-    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-
-.lds-ripple div:nth-child(2) {
-    animation-delay: -0.5s;
-}
-
-@keyframes lds-ripple {
-    0% {
-        top: 36px;
-        left: 36px;
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-    100% {
-        top: 0px;
-        left: 0px;
-        width: 72px;
-        height: 72px;
-        opacity: 0;
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.............................................
-
-
-
-
-
-@font-face {
-    font-family: Poppins-Regular;
-    src: url('../fonts/poppins/Poppins-Regular.ttf');
-}
-
-@font-face {
-    font-family: Poppins-Medium;
-    src: url('../fonts/poppins/Poppins-Medium.ttf');
-}
-
-@font-face {
-    font-family: Poppins-Bold;
-    src: url('../fonts/poppins/Poppins-Bold.ttf');
-}
-
-@font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../fonts/poppins/Poppins-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-Bold;
-    src: url('../fonts/montserrat/Montserrat-Bold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-SemiBold;
-    src: url('../fonts/montserrat/Montserrat-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-Regular;
-    src: url('../fonts/montserrat/Montserrat-Regular.ttf');
-}
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    color: rgb(49, 49, 49);
-}
-
-body,
-html {
-    height: 100%;
-    font-family: Poppins-Regular, sans-serif;
-    background-color: rgb(218, 238, 238);
-    background-size: cover;
-    overflow-x: hidden;
-}
-
-.img-bg {
-    background-image: url(../images/background.jpg) !important;
-}
-
-.navbar #navbar-search {
-    border: 1px solid rgba(0, 128, 128, 0.11);
-    padding: 10px;
-    margin: none;
-    width: 30%;
-    font-family: poppins-regular;
-}
-
-.navbar #navbar-search:focus {
-    transition: 1s;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-around;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-wrap: wrap;
-}
-
-.input-join {
-    padding: 2.4em;
-    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
-    display: flex;
-    display: -ms-flexbox;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    margin-bottom: 15px;
-    border: 1px solid white;
-    position: relative;
-    background-color: transparent;
-}
-
-#map {
-    height: 100%;
-}
-
-.search {
-    padding: 10px;
-    width: 100%;
-    border: none;
-    font-family: Montserrat-Regular;
-    font-size: 1.2em;
-    background-color: transparent;
-    padding: 10px;
-    width: 100%;
-    margin: 10px;
-    outline: none;
-    border: none;
-    font-size: 25px;
-    color: rgba(40, 93, 150, 0.849);
-    font-family: Poppins-Medium;
-    color: white;
-}
-
-.search:focus {
-    padding: 15px;
-    font-size: 1.6em;
-    transition: .7s;
-}
-
-#searchbtn {
-    border: none;
-    background: none;
-    padding: 10px;
-}
-
-.input-join .icon {
-    font-size: 2em;
-    color: blue;
-}
-
-
-/************/
-
-.card {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
-    background-color: white;
-    justify-self: center;
-}
-
-.m-2 {
-    margin: 2em !important;
-}
-
-.h-70 {
-    height: 70% !important;
-}
-
-.w-70 {
-    width: 70% !important;
-}
-
-.w-50 {
-    width: 50%;
-}
-
-.d-flex {
-    display: flex !important;
-}
-
-.d-none {
-    display: none;
-    ;
-}
-
-.w-100 {
-    width: 100px !important;
-}
-
-.justify-content-center {
-    justify-content: center !important;
-}
-
-@media (max-width: 576px) {
-
-
-
-
-@font-face {
-    font-family: Poppins-Regular;
-    src: url('../fonts/poppins/Poppins-Regular.ttf');
-}
-
-@font-face {
-    font-family: Poppins-Medium;
-    src: url('../fonts/poppins/Poppins-Medium.ttf');
-}
-
-@font-face {
-    font-family: Poppins-Bold;
-    src: url('../fonts/poppins/Poppins-Bold.ttf');
-}
-
-@font-face {
-    font-family: Poppins-SemiBold;
-    src: url('../fonts/poppins/Poppins-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-Bold;
-    src: url('../fonts/montserrat/Montserrat-Bold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-SemiBold;
-    src: url('../fonts/montserrat/Montserrat-SemiBold.ttf');
-}
-
-@font-face {
-    font-family: Montserrat-Regular;
-    src: url('../fonts/montserrat/Montserrat-Regular.ttf');
-}
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
-
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    color: rgb(49, 49, 49);
-}
-
-body,
-html {
-    height: 100%;
-    font-family: Poppins-Regular, sans-serif;
-    background-color: rgb(218, 238, 238);
-    background-size: cover;
-    overflow-x: hidden;
-}
-
-.img-bg {
-    background-image: url(../images/background.jpg) !important;
-}
-
-.navbar #navbar-search {
-    border: 1px solid rgba(0, 128, 128, 0.11);
-    padding: 10px;
-    margin: none;
-    width: 30%;
-    font-family: poppins-regular;
-}
-
-.navbar #navbar-search:focus {
-    transition: 1s;
-}
-
-.app {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: space-around;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    flex-wrap: wrap;
-}
-
-.input-join {
-    padding: 2.4em;
-    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
-    display: flex;
-    display: -ms-flexbox;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    margin-bottom: 15px;
-    border: 1px solid white;
-    position: relative;
-    background-color: transparent;
-}
-
-#map {
-    height: 100%;
-}
-
-.search {
-    padding: 10px;
-    width: 100%;
-    border: none;
-    font-family: Montserrat-Regular;
-    font-size: 1.2em;
-    background-color: transparent;
-    padding: 10px;
-    width: 100%;
-    margin: 10px;
-    outline: none;
-    border: none;
-    font-size: 25px;
-    color: rgba(40, 93, 150, 0.849);
-    font-family: Poppins-Medium;
-    color: white;
-}
-
-.search:focus {
-    padding: 15px;
-    font-size: 1.6em;
-    transition: .7s;
-}
-
-#searchbtn {
-    border: none;
-    background: none;
-    padding: 10px;
-}
-
-.input-join .icon {
-    font-size: 2em;
-    color: blue;
-}
-
-
-/************/
-
-.card {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 3px 3px 10px rgba(46, 45, 45, 0.548);
-    background-color: white;
-    justify-self: center;
-}
-
-.m-2 {
-    margin: 2em !important;
-}
-
-.h-70 {
-    height: 70% !important;
-}
-
-.w-70 {
-    width: 70% !important;
-}
-
-.w-50 {
-    width: 50%;
-}
-
-.d-flex {
-    display: flex !important;
-}
-
-.d-none {
-    display: none;
-    ;
-}
-
-.w-100 {
-    width: 100px !important;
-}
-
-.justify-content-center {
-    justify-content: center !important;
-}
-
-@media (max-width: 576px) {
