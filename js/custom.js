@@ -1,17 +1,26 @@
 $(document).ready(function() {
     const WEATHER_API = 'fb73799f65352e83e4792ed87c0a624';
-    var city = $('#searchInput').val();
-    $('.input-join').submit(function(event) {
+    var city = 'lagos';
+    $('#main_search_input').submit(function(event) {
         event.preventDefault();
         $('#searchIcon').toggleClass('fa-search');
         $('#searchspinner').toggleClass('d-none');
-        fetch_weather(city)
-        console.log(city)
+        $('#header_searchInput').val($('#searchInput').val());
+        fetch_weather('lagos')
+        console.log($('#searchInput').val())
+
     });
-    $('#showMap').click(function(e) {
+    $('.showMap').click(function(e) {
         e.preventDefault();
         $('#weather-card').fadeIn(1000).addClass('d-none');
         $('#map-card').fadeIn(1000).removeClass('d-none');
+        $('.navbar #navbar-search').removeClass('d-none');
+        $('searchform').addClass('d-none');
+    });
+    $('#showWeather').click(function(e) {
+        e.preventDefault();
+        $('#weather-card').fadeOut(1000).removeClass('d-none');
+        $('#map-card').fadeIn(1000).addClass('d-none');
     });
 
     //https://samples.openweathermap.org/data/2.5/weather?q=lagos&appid=8fb73799f65352e83e4792ed87c0a624
@@ -19,14 +28,20 @@ $(document).ready(function() {
 
 
     function fetch_weather(city) {
+
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + $('#searchInput').val() +
                 '&appid=8fb73799f65352e83e4792ed87c0a624')
             .then(res => res.json())
             .then(res => {
+                $('#error').addClass('d-none');
+                $('#main_search_input').addClass('d-none');
+                $('#input-nav-container').removeClass('d-none');
                 $('#freint').html(res.main.temp);
                 var f = res.main.temp;
                 var aF = (f - 32) * 5;
                 var c = Math.round((aF / 9) * 100) / 100;
+                $('.hide').toggle();
+                $('#body').fadeIn().addClass('bg-teal-light').removeClass('img-bg');
                 $('#celcius').html(c);
                 $('#Humility').html(res.main.humidity);
                 $('#Pressure').html(res.main.pressure);
@@ -50,7 +65,16 @@ $(document).ready(function() {
                 console.log(res);
                 $('#weather-card').fadeIn(1000).removeClass('d-none');
             })
-            .catch(err => alert(err));
+            .catch(function(error) {
+                $('#error').fadeIn().removeClass('d-none');
+                if (error == 'TypeError: Failed to fetch') {
+                    $('#error_message').html('Failed to fetch weather details, Posible network error!');
+                } else {
+                    $('#error').html(error);
+                }
+                $('#searchIcon').toggleClass('fa-search');
+                $('#searchspinner').toggleClass('d-none');
+            });
     }
     var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     var labelIndex = 0;
@@ -59,6 +83,7 @@ $(document).ready(function() {
         lat: -25.344,
         lng: 131.036
     }) {
+        $('#body').fadeIn().removeClass('bg-teal-light').addClass('img-bg');
         // The location of Uluru
         // The map, centered at Uluru
         var map = new google.maps.Map(
