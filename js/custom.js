@@ -1,12 +1,19 @@
 $(document).ready(function() {
   const WEATHER_API = 'fb73799f65352e83e4792ed87c0a624';
-  var city = 'lagos';
-  $('#main_search_input, #input-nav-container').submit(function(event) {
+  var city = $('#searchInput').val() ;
+  $('#main_search_input').submit(function(event) {
     event.preventDefault();
     $('#searchIcon').toggleClass('fa-search');
     $('#searchspinner').toggleClass('d-none');
     $('#header_searchInput').val($('#searchInput').val());
-    fetch_weather('lagos')
+    //searchInput
+    fetch_weather($('#searchInput').val())
+    console.log($('#searchInput').val())
+
+  });
+  $('#input-nav-container').submit(function(event) {
+    event.preventDefault();
+    fetch_weather($('#header_searchInput').val())
     console.log($('#searchInput').val())
 
   });
@@ -29,7 +36,7 @@ $(document).ready(function() {
 
   function fetch_weather(city) {
 
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + $('#searchInput').val() +
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city +
         '&appid=8fb73799f65352e83e4792ed87c0a624')
       .then(res => res.json())
       .then(res => {

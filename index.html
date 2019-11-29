@@ -23,12 +23,6 @@
     <form class="d-none" id="input-nav-container">
       <input type="text" id="header_searchInput" class="navbar-search" placeholder="Enter city e.g Lagos, Nigeria ">
       <button id="header_searchbtn"><i id="header_searchIcon" class="fa fa-search icon"></i></button>
-      <!-- <div id="searchspinner" class="d-none">
-                <div class="lds-ripple">
-                    <div></div>
-                    <div></div>
-                </div>
-            </div> -->
     </form>
 
   </header>
@@ -48,12 +42,12 @@
     </div>
   </div>
 
-  <section id="weather-card" class="d-none mag-top-10 mag-top-50-sm mag-5; mag-top-10-md" style="margin: 5%">
+  <section id="weather-card" class="d-none mag-top-10 mag-top-50-sm mag-top-10-md" style="margin: 5%">
     <div class="card pad-1" style="display: block; padding: 2em;">
       <div class="card-header">
         <div class="d-flex justify-content-center pad-1">
-          <h3>The weather details of <span id="city" class="text-black">Lagos </span>you can <a id="showMap" href="">
-              View location Map</a> or share weather details on <i class="fa fa-facebook-square text-blue"></i> or <i class="fa fa-twitter"></i>
+          <h3>The weather details of <span id="city" class="text-black">Lagos </span>you can
+            <button class="teal-btn-outline pad-1 showMap">View map</button> or share weather details on <i class="fa fa-facebook-square text-blue"></i> or <i class="fa fa-twitter"></i>
           </h3>
           <!-- <button class="teal-btn-outline pad-1 showMap">View map</button> -->
         </div>
@@ -82,10 +76,10 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
+  
   <div id="map-card" class="card h-70 w-60 d-none">
     <div id="map"></div>
   </div>

@@ -139,7 +139,18 @@
     .hide {
       display: none;
     }
+#map-card{
 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 10%;
+}
     /************/
     .card {
       display: -ms-flexbox;
